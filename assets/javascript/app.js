@@ -5,15 +5,11 @@ var choiceA = $("#A");
 var choiceB = $("#B");
 var choiceC = $("#C");
 var choiceD = $("#D");
-
-
-
 window.onload = function() {
     $("#start").on("click", start);
     $("#done").on("click", stop);
     $("#reset").on("click", reset);
   };
-
 var intervalId;
 var clockRunning = false;
 var time = 30;
@@ -22,14 +18,11 @@ var incorrect = 0;
 var correct = 0;
 var quest = 0;
 var questions = [];
-
-
 function reset() {
 time = 0;
 // DONE: Change the "display" div to "00:00."
 $("#display").text("00:30");
 }
-
 function start() {
     console.log("start")
     // DONE: Use setInterval to start the count here and set the clock to running.
@@ -38,37 +31,43 @@ function start() {
         clockRunning = true;
     }
     console.log(questions[round])
-    question.append(questions[round].question)
-    choiceA.append(questions[round].choiceA)
-    choiceB.append(questions[round].choiceB)
-    choiceC.append(questions[round].choiceC)
-    choiceD.append(questions[round].choiceD)
-
+    question.text(questions[round].question)
+    choiceA.text(questions[round].choiceA)
+    choiceB.text(questions[round].choiceB)
+    choiceC.text(questions[round].choiceC)
+    choiceD.text(questions[round].choiceD)
 }
-function displayQuestions() {
-    if (!questions.includes()) {
+function displayNextQuestions() {
+    if (questions[round] === undefined) {
+        alert("End of trivia")
+    } else {
         $("#question").text(questions[round].question);
-
-            for (let i = 0; i < questions[round].length; i++) {
-                $('#question' + i).html(questions[round].questions[i]);
-                if (i === 0) {
-                    $('#choices' + i).val(1);
-                } else {
-                    $('#choices' + i).val(0);
-                }
-            }
-        }}
-        function checkAnswer(answer, questions) {
-            if (answer == questions[correct].a) {
-              questions[correct].correct = 1;
-              score.push(questions[correct].correct);
-              
+        for (let i = 0; i < questions[round].length; i++) {
+            $('#question' + i).html(questions[round].questions[i]);
+            if (i === 0) {
+                $('#choices' + i).val(1);
             } else {
-              score.push(questions[correct].correct);
+                $('#choices' + i).val(0);
             }
         }
+    }
+}
+function checkAnswer(answer) {
+    console.log("hey", answer)
+    if (answer == questions[round].correct) {
+        alert("Correct Answer!!!")
+        round++;
+        displayNextQuestions();
+        start();
+        // questions[correct].correct = 1;
+        // score.push(questions[correct].correct);
         
-
+    } else {
+        alert("Incorrect Answer")
+        // score.push(questions[correct].correct);
+    }
+}
+        
 function stop() {
     // DONE: Use clearInterval to stop the count here and set the clock to not be running.
     clearInterval(intervalId);
@@ -77,16 +76,18 @@ function stop() {
 function count() {
     // DONE: increment time by 1, remember we cant use "this" here.
     time--;
+    if (time <= 0) {
+        alert("time up!!!")
+        stop()
+        location.reload();
+    }
     // DONE: Get the current time, pass that into the timeConverter function,
     //       and save the result in a variable.
     var converted = timeConverter(time);
     console.log(converted);
-
     // DONE: Use the variable we just created to show the converted time in the "display" div.
     $("#display").text(converted);
 }
-
-
 function timeConverter(t) {
     var minutes = Math.floor(t / 60);
     var seconds = t - (minutes * 60);
@@ -101,17 +102,7 @@ function timeConverter(t) {
     }
     return minutes + ":" + seconds;
 }
-
-function checkAnswer(params) {
-    console.log(params)
-}
-
-
-
 ////////////////////////////////////////////////////////////////
-// var start = $("#start");
-
-
 var questions = [
     {
         question:"What is the largest island in Mexico?",
@@ -146,4 +137,5 @@ var questions = [
         correct: "A", 
     },
 ]
+
 
