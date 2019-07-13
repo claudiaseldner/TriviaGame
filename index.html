@@ -1,24 +1,48 @@
+
+
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <title>Trivia Game</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css">
-    <script src="assets/javascript/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <title>Trivial Trivia</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
+    <div class="mainContainer">
 
-        <h1>Totally Trivial Trivia!</h1>
+            <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                      <h1 class="display-4">Totally Trivial Trivia!</h1>
+                      <p class="lead">Select the answer of your choice as quick as you can!.</p>
+                      <p class="lead" style="font-weight: bold">TIME REMAINING: <div id="display">00:00</div> </p>
+                    </div>
+                  </div>
+       
+        <button id="start" type="button" class="btn btn-secondary btn-lg btn-block">START</button>
+        <button id="done"type="button" class="btn btn-secondary btn-lg btn-block">DONE</button>
+        <div class="gameDiv">
+        <div id="question"><p> Question </p></div>
+        <h2 id="text"></h2>
+        <div id="choices">
+            <div class="choice" id="A" onclick="checkAnswer('A')">A- </div>
+            <div class="choice" id="B" onclick="checkAnswer('B')">B- </div>
+            <div class="choice" id="C" onclick="checkAnswer('C')">C- </div>
+            <div class="choice" id="D" onclick="checkAnswer('D')">D- </div>
+        </div>
 
-        
-
-
-
-
-
-    
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
+
 </html>
+
+
+<style>
+    .choice {
+        cursor: pointer;
+    }
+</style>
